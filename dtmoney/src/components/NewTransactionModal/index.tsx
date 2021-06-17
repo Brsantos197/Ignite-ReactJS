@@ -31,9 +31,6 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
         api.post('/transactions', data)
     }
 
-    
-    
-
     return (
         <Modal 
             isOpen={isOpen}
