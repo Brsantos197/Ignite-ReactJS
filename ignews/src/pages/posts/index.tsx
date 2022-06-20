@@ -1,5 +1,7 @@
 import Head from "next/head";
 import styles from "./styles.module.scss";
+import { createClient } from '../../../prismicio'
+
 
 export default function Posts() {
   return (
@@ -8,6 +10,7 @@ export default function Posts() {
 
       <main className={styles.container}>
         <div className={styles.posts}>
+          {}
           <a>
             <time>19 de junho de 2022</time>
             <strong>Creating a Monorepo with Lerna & Yarn Workspaces</strong>
@@ -32,4 +35,17 @@ export default function Posts() {
       </main>
     </>
   )
+}
+
+
+export async function getStaticProps({ previewData }) {
+  const client = createClient({ previewData })
+
+  const page = await client.getAllByType("publication", {
+    pageSize: 100
+  })
+
+  return {
+    props: { page }, // Will be passed to the page component as props
+  }
 }
